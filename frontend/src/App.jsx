@@ -15,7 +15,8 @@ function App() {
     setRecommendation(null)
     
     try {
-      const response = await axios.post('http://localhost:5000/api/recommend', formData)
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+      const response = await axios.post(`${apiUrl}/api/recommend`, formData)
       setRecommendation(response.data)
     } catch (err) {
       console.error(err)
