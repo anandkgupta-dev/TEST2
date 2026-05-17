@@ -18,14 +18,17 @@ A student has provided the following profile:
 - Interests: ${interests}
 - Career Goal: ${careerGoal}
 
-Based on this profile, recommend:
+IMPORTANT: First evaluate the profile. If the inputs are gibberish, placeholder text (like "abc", "test"), or completely lack meaningful context to make a real recommendation, you MUST reject it by returning the following JSON exactly and nothing else:
+{ "error": "Please provide more specific and meaningful details about your skills, interests, and career goals." }
+
+If the profile is valid, recommend:
 1. Courses (specific names/topics)
 2. Learning paths (step-by-step skill acquisition)
 3. Certifications (industry-recognized credentials)
 
 For each recommendation, you MUST provide a detailed explanation of "Why this course/path/certification is suitable" connecting it directly to their skills, interests, and career goal.
 
-Output your response strictly in the following JSON format:
+Output your response strictly in the following JSON format (or the error JSON above):
 {
   "courses": [
     { "title": "Course Name", "description": "Brief description", "whySuitable": "Explanation" }
@@ -60,9 +63,15 @@ Output your response strictly in the following JSON format:
     // Clean up markdown formatting if present
     if (aiContent.startsWith('```json')) {
       aiContent = aiContent.substring(7, aiContent.length - 3);
+    } else if (aiContent.startsWith('```')) {
+      aiContent = aiContent.substring(3, aiContent.length - 3);
     }
     
-    const parsedData = JSON.parse(aiContent);
+    const parsedData = JSON.parse(aiContent.trim());
+
+    if (parsedData.error) {
+      return res.status(400).json({ error: parsedData.error });
+    }
 
     // Save to database
     const newRecommendation = new Recommendation({
