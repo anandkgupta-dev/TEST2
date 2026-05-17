@@ -15,8 +15,7 @@ function App() {
     setRecommendation(null)
     
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
-      const response = await axios.post(`${apiUrl}/api/recommend`, formData)
+      const response = await axios.post('https://edupath-backend-43go.onrender.com/api/recommend', formData)
       setRecommendation(response.data)
     } catch (err) {
       console.error(err)
