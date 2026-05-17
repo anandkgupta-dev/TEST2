@@ -19,7 +19,12 @@ function App() {
       setRecommendation(response.data)
     } catch (err) {
       console.error(err)
-      setError(err.response?.data?.error || 'An error occurred while generating recommendations.')
+      setError(
+        (err.response?.data?.details && typeof err.response.data.details === 'string' ? err.response.data.details : null) || 
+        (err.response?.data?.details?.message) || 
+        err.response?.data?.error || 
+        'An error occurred while generating recommendations.'
+      )
     } finally {
       setLoading(false)
     }
