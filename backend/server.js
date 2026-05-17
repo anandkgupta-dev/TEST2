@@ -13,14 +13,21 @@ app.use(express.json());
 
 app.use('/api', apiRoutes);
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+const mongoURI = process.env.MONGO_URI;
+
+if (!mongoURI) {
+  console.error("FATAL ERROR: MONGO_URI environment variable is missing.");
+} else {
+  mongoose
+    .connect(mongoURI)
+    .then(() => {
+      console.log('Connected to MongoDB successfully');
+    })
+    .catch((err) => {
+      console.error('Failed to connect to MongoDB:', err.message);
     });
-  })
-  .catch((err) => {
-    console.error('Failed to connect to MongoDB', err);
-  });
+}
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
