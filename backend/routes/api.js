@@ -80,8 +80,9 @@ Output your response strictly in the following JSON format:
     console.error('Error in /recommend:', error.message);
     if(error.response) {
       console.error('API Error Data:', error.response.data);
+      return res.status(500).json({ error: 'Failed to generate recommendations.', details: error.response.data });
     }
-    res.status(500).json({ error: 'Failed to generate recommendations.' });
+    res.status(500).json({ error: 'Failed to generate recommendations.', details: error.message });
   }
 });
 
