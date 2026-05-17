@@ -26,51 +26,51 @@ const InputForm = ({ onSubmit, loading }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="skills">Current Skills</label>
         <input
           type="text"
           id="skills"
           name="skills"
           className="form-control"
-          placeholder="e.g. HTML, CSS, basic JavaScript"
+          placeholder=" "
           value={formData.skills}
           onChange={handleChange}
           required
         />
+        <label htmlFor="skills">Current Skills (e.g. React, Python)</label>
       </div>
 
       <div className="form-group">
-        <label htmlFor="interests">Interests / Hobbies</label>
         <input
           type="text"
           id="interests"
           name="interests"
           className="form-control"
-          placeholder="e.g. Design, problem solving, video games"
+          placeholder=" "
           value={formData.interests}
           onChange={handleChange}
           required
         />
+        <label htmlFor="interests">Interests / Hobbies</label>
       </div>
 
       <div className="form-group">
-        <label htmlFor="careerGoal">Career Goal</label>
         <input
           type="text"
           id="careerGoal"
           name="careerGoal"
           className="form-control"
-          placeholder="e.g. Become a Full-Stack Web Developer"
+          placeholder=" "
           value={formData.careerGoal}
           onChange={handleChange}
           required
         />
+        <label htmlFor="careerGoal">Career Goal</label>
       </div>
 
       <button type="submit" className="btn-primary" disabled={loading}>
         {loading ? (
           <>
-            <div className="spinner"></div> Processing...
+            <div className="spinner"></div> Generating Path...
           </>
         ) : (
           <>

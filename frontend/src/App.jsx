@@ -41,7 +41,7 @@ function App() {
         <div className="glass-panel">
           <InputForm onSubmit={handleSubmit} loading={loading} />
           {error && (
-            <div style={{ color: '#ef4444', marginTop: '1rem', textAlign: 'center' }}>
+            <div className="error-text">
               {error}
             </div>
           )}

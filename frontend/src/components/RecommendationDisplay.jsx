@@ -3,8 +3,19 @@ import { FaBookOpen, FaRoute, FaCertificate, FaInfoCircle } from 'react-icons/fa
 const RecommendationDisplay = ({ data }) => {
   if (!data) return null;
 
+  const handleMouseMove = (e) => {
+    const cards = document.getElementsByClassName("recommendation-card");
+    for(const card of cards) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    }
+  };
+
   return (
-    <div className="results-container">
+    <div className="results-container" onMouseMove={handleMouseMove}>
       {/* Recommended Courses */}
       {data.courses && data.courses.length > 0 && (
         <section>
