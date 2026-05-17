@@ -42,6 +42,7 @@ Output your response strictly in the following JSON format:
       'https://openrouter.ai/api/v1/chat/completions',
       {
         model: 'google/gemini-2.5-flash',
+        max_tokens: 2000,
         messages: [{ role: 'user', content: prompt }],
       },
       {
