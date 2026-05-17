@@ -41,7 +41,7 @@ Output your response strictly in the following JSON format:
     const response = await axios.post(
       'https://openrouter.ai/api/v1/chat/completions',
       {
-        model: 'google/gemini-2.5-flash-12b',
+        model: 'google/gemini-2.5-flash',
         messages: [{ role: 'user', content: prompt }],
       },
       {
